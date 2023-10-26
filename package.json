@@ -41,21 +41,25 @@
   "scripts": {
     "build": "rimraf dist && vite build",
     "serve": "vite --host",
-    "lint": "eslint --ext .js,.vue src test/unit/specs",
+    "lint": "eslint --ext .js,.vue src test",
+    "test": "vitest",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@vitejs/plugin-legacy": "^4.1.1",
     "@vitejs/plugin-vue": "^4.4.0",
+    "@vue/test-utils": "^2.4.1",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.15.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.17.0",
+    "jsdom": "^22.1.0",
     "postcss": "^8.4.31",
     "postcss-html": "^1.5.0",
     "rimraf": "^5.0.5",
     "vite": "^4.5.0",
-    "vite-plugin-eslint": "^1.8.1"
+    "vite-plugin-eslint": "^1.8.1",
+    "vitest": "^1.0.0-beta.2"
   },
   "peerDependencies": {
     "vue": "^3.2.0"

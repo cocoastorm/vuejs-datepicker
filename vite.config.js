@@ -1,7 +1,8 @@
-import fs from 'fs';
-import path from 'path'
+import fs from 'node:fs';
+import path from 'node:path'
+import { fileURLToPath, URL } from 'node:url';
 import {defineConfig} from 'vite'
-import vue from '@vitejs/plugin-vue'
+import Vue from '@vitejs/plugin-vue'
 
 const locales = fs.readdirSync('./src/locale/translations').map((locale) => ([
   path.join('locale/translations', path.basename(locale, '.js')),
@@ -10,8 +11,13 @@ const locales = fs.readdirSync('./src/locale/translations').map((locale) => ([
 
 export default defineConfig({
   plugins: [
-    vue(),
+    Vue(),
   ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
   build: {
     lib: {
       entry: {
