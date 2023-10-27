@@ -284,7 +284,7 @@ export default {
       },
       highlighted: {},
       eventMsg: null,
-      state: state,
+      state,
       vModelExample: null,
       languages: lang,
       language: 'en'
@@ -320,7 +320,7 @@ export default {
       if (elem.target.value === 'undefined') {
         return
       }
-      let highlightedDays = elem.target.value.split(',').map(day => parseInt(day))
+      const highlightedDays = elem.target.value.split(',').map(day => parseInt(day))
       this.highlighted = {
         from: this.highlighted.from,
         to: this.highlighted.to,
@@ -331,7 +331,7 @@ export default {
       if (elem.target.value === 'undefined') {
         return
       }
-      let disabledDays = elem.target.value.split(',').map(day => parseInt(day))
+      const disabledDays = elem.target.value.split(',').map(day => parseInt(day))
       this.disabledDates = {
         from: this.disabledDates.from,
         to: this.disabledDates.to,

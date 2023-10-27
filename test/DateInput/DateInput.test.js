@@ -3,18 +3,6 @@ import { shallowMount } from '@vue/test-utils'
 import { en } from '@/locale'
 
 describe('DateInput', () => {
-  let vm
-
-  beforeEach(() => {
-    vm = shallowMount(DateInput, {
-      props: {
-        selectedDate: new Date(2018, 2, 24),
-        format: 'dd MMM yyyy',
-        translation: en
-      }
-    })
-  })
-
   it('should render correct contents', () => {
     const wrapper = shallowMount(DateInput, {
       props: {

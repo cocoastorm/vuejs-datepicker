@@ -1,6 +1,6 @@
 import Datepicker from '@/components/Datepicker.vue'
 import DateInput from '@/components/DateInput.vue'
-import { nextTick } from 'vue';
+import { nextTick } from 'vue'
 import { shallowMount, mount } from '@vue/test-utils'
 
 describe('Datepicker unmounted', () => {
