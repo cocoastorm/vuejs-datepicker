@@ -28,13 +28,13 @@
     "./locale/*.cjs": "./dist/locale/*.cjs",
     "./style.css": "./dist/style.css"
   },
-  "author": "Charlie Kassel <ck@charliekassel.com>",
+  "author": "TuneZilla Ltd. <web@tunezilla.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/charliekassel/vuejs-datepicker"
+    "url": "https://github.com/tunezilla/vuejs-datepicker"
   },
   "bugs": {
-    "url": "https://github.com/charliekassel/vuejs-datepicker/issues"
+    "url": "https://github.com/tunezilla/vuejs-datepicker/issues"
   },
   "private": false,
   "license": "MIT",
