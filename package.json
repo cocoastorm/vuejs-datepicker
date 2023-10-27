@@ -1,6 +1,6 @@
 {
   "name": "@tunezilla/vuejs-datepicker",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0",
   "description": "A simple Vue.js datepicker component. Supports disabling of dates, inline mode, translations",
   "keywords": [
     "vue",
