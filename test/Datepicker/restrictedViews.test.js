@@ -5,7 +5,7 @@ describe('Datepicker with restricted views', () => {
   let wrapper
   it('should default initialView to minimumView', () => {
     wrapper = mount(Datepicker, {
-      propsData: {
+      props: {
         minimumView: 'month',
         maximumView: 'month'
       }
@@ -15,7 +15,7 @@ describe('Datepicker with restricted views', () => {
 
   it('should save and close when selecting on minimum-view "month"', () => {
     wrapper = mount(Datepicker, {
-      propsData: {
+      props: {
         minimumView: 'month',
         maximumView: 'year'
       }
@@ -31,7 +31,7 @@ describe('Datepicker with restricted views', () => {
 
   it('should save and close when selecting on minimum-view "year"', () => {
     wrapper = mount(Datepicker, {
-      propsData: {
+      props: {
         minimumView: 'year',
         maximumView: 'year'
       }
@@ -44,7 +44,7 @@ describe('Datepicker with restricted views', () => {
 
   it('should only allow views in min-max range', () => {
     wrapper = mount(Datepicker, {
-      propsData: {
+      props: {
         minimumView: 'day',
         maximumView: 'month'
       }
@@ -55,7 +55,7 @@ describe('Datepicker with restricted views', () => {
     expect(wrapper.vm.showYearCalendar()).toEqual(false)
 
     wrapper = mount(Datepicker, {
-      propsData: {
+      props: {
         minimumView: 'month',
         maximumView: 'month'
       }
@@ -67,7 +67,7 @@ describe('Datepicker with restricted views', () => {
     expect(wrapper.vm.showYearCalendar()).toEqual(false)
 
     wrapper = mount(Datepicker, {
-      propsData: {
+      props: {
         minimumView: 'day',
         maximumView: 'year'
       }
@@ -79,7 +79,7 @@ describe('Datepicker with restricted views', () => {
 
   it('should throw an error on disallowed initial views', () => {
     wrapper = mount(Datepicker, {
-      propsData: {
+      props: {
         minimumView: 'day',
         maximumView: 'month',
         initialView: 'year'
@@ -93,7 +93,7 @@ describe('Datepicker with restricted views', () => {
 
   it('should not render unused views', () => {
     wrapper = mount(Datepicker, {
-      propsData: {
+      props: {
         minimumView: 'day',
         maximumView: 'day'
       }
@@ -105,7 +105,7 @@ describe('Datepicker with restricted views', () => {
     expect(wrapper.vm.showMonthCalendar()).toEqual(false)
 
     wrapper = mount(Datepicker, {
-      propsData: {
+      props: {
         minimumView: 'month',
         maximumView: 'year'
       }

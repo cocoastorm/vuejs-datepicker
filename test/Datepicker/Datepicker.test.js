@@ -1,6 +1,7 @@
 import Datepicker from '@/components/Datepicker.vue'
 import DateInput from '@/components/DateInput.vue'
-import { shallow, mount } from '@vue/test-utils'
+import { nextTick } from 'vue';
+import { shallowMount, mount } from '@vue/test-utils'
 
 describe('Datepicker unmounted', () => {
   it('has a mounted hook', () => {
@@ -23,8 +24,8 @@ describe('Datepicker mounted', () => {
   let date
   beforeEach(() => {
     date = new Date(2016, 1, 15)
-    wrapper = shallow(Datepicker, {
-      propsData: {
+    wrapper = shallowMount(Datepicker, {
+      props: {
         format: 'yyyy-MM-dd',
         value: date
       }
@@ -51,8 +52,8 @@ describe('Datepicker mounted', () => {
 
   it('sets the date', () => {
     const date = new Date(2016, 9, 9)
-    const wrapper = shallow(Datepicker, {
-      propsData: {
+    const wrapper = shallowMount(Datepicker, {
+      props: {
         format: 'yyyy-MM-dd'
       }
     })
@@ -62,7 +63,7 @@ describe('Datepicker mounted', () => {
 
   it('clears the date', () => {
     const date = new Date(2016, 9, 9)
-    const wrapper = shallow(Datepicker)
+    const wrapper = shallowMount(Datepicker)
     wrapper.vm.setDate(date.getTime())
     wrapper.vm.clearDate()
     expect(wrapper.vm.selectedDate).toEqual(null)
@@ -133,7 +134,7 @@ describe('Datepicker mounted', () => {
   })
 
   it('resets the default page date', () => {
-    const wrapper = shallow(Datepicker)
+    const wrapper = shallowMount(Datepicker)
     const today = new Date()
     expect(wrapper.vm.pageDate.getFullYear()).toEqual(today.getFullYear())
     expect(wrapper.vm.pageDate.getMonth()).toEqual(today.getMonth())
@@ -145,7 +146,7 @@ describe('Datepicker mounted', () => {
   })
 
   it('does not set the default page date if a date is selected', () => {
-    const wrapper = shallow(Datepicker)
+    const wrapper = shallowMount(Datepicker)
     const today = new Date()
     const pastDate = new Date(2018, 3, 20)
     expect(wrapper.vm.pageDate.getFullYear()).toEqual(today.getFullYear())
@@ -159,52 +160,43 @@ describe('Datepicker mounted', () => {
   })
 
   it('sets the date on typedDate event', () => {
-    const wrapper = shallow(Datepicker)
+    const wrapper = shallowMount(Datepicker)
     const today = new Date()
     wrapper.vm.setTypedDate(today)
     expect(wrapper.vm.selectedDate).toEqual(today)
   })
 
-  it('watches value', done => {
-    const wrapper = shallow(Datepicker, {
-      propsData: {
+  it('watches value', async () => {
+    const wrapper = shallowMount(Datepicker, {
+      props: {
         value: '2018-01-01'
       }
     })
-    const spy = jest.spyOn(wrapper.vm, 'setValue')
-    wrapper.vm.value = '2018-04-26'
-    wrapper.vm.$nextTick(() => {
-      expect(spy).toBeCalled()
-      done()
-    })
+    const spy = vi.spyOn(wrapper.vm, 'setValue')
+    await wrapper.setProps({ value: '2018-04-26' })
+    expect(spy).toBeCalled()
   })
 
-  it('watches openDate', done => {
-    const wrapper = shallow(Datepicker, {
-      propsData: {
+  it('watches openDate', async () => {
+    const wrapper = shallowMount(Datepicker, {
+      props: {
         openDate: new Date(2018, 0, 1)
       }
     })
-    const spy = jest.spyOn(wrapper.vm, 'setPageDate')
-    wrapper.vm.openDate = new Date(2018, 3, 26)
-    wrapper.vm.$nextTick(() => {
-      expect(spy).toBeCalled()
-      done()
-    })
+    const spy = vi.spyOn(wrapper.vm, 'setPageDate')
+    await wrapper.setProps({ openDate: new Date(2018, 3, 26) })
+    expect(spy).toBeCalled()
   })
 
-  it('watches initialView', done => {
-    const wrapper = shallow(Datepicker, {
-      propsData: {
+  it('watches initialView', async () => {
+    const wrapper = shallowMount(Datepicker, {
+      props: {
         initialView: 'day'
       }
     })
-    const spy = jest.spyOn(wrapper.vm, 'setInitialView')
-    wrapper.vm.initialView = 'month'
-    wrapper.vm.$nextTick(() => {
-      expect(spy).toBeCalled()
-      done()
-    })
+    const spy = vi.spyOn(wrapper.vm, 'setInitialView')
+    await wrapper.setProps({ initialView: 'month' })
+    expect(spy).toBeCalled()
   })
 
   it('should emit changedMonth on a month change received from PickerDay', () => {
@@ -217,8 +209,8 @@ describe('Datepicker mounted', () => {
 describe('Datepicker.vue set by string', () => {
   let wrapper
   it('can parse a string date', () => {
-    wrapper = shallow(Datepicker, {
-      propsData: {
+    wrapper = shallowMount(Datepicker, {
+      props: {
         format: 'yyyy MM dd',
         value: '2016-02-20'
       }
@@ -230,8 +222,8 @@ describe('Datepicker.vue set by string', () => {
   })
 
   it('should nullify malformed value', () => {
-    wrapper = shallow(Datepicker, {
-      propsData: {
+    wrapper = shallowMount(Datepicker, {
+      props: {
         value: 'today'
       }
     })
@@ -242,8 +234,8 @@ describe('Datepicker.vue set by string', () => {
 describe('Datepicker.vue set by timestamp', () => {
   let wrapper
   it('can parse unix timestamp', () => {
-    wrapper = shallow(Datepicker, {
-      propsData: {
+    wrapper = shallowMount(Datepicker, {
+      props: {
         format: 'yyyy MM dd',
         value: new Date(Date.UTC(2018, 0, 29)).getTime()
       }
@@ -256,7 +248,7 @@ describe('Datepicker.vue set by timestamp', () => {
 
 describe('Datepicker.vue using UTC', () => {
   let wrapper
-  it('correctly sets the value using UTC', done => {
+  it('correctly sets the value using UTC', async () => {
     const timezoneOffset = ((new Date()).getTimezoneOffset() / 60)
 
     // this is ambiguous because localzone differs by one day than UTC
@@ -269,24 +261,25 @@ describe('Datepicker.vue using UTC', () => {
 
     // It's important to use the `mount` helper here
     wrapper = mount(Datepicker, {
-      propsData: {
+      props: {
         format: 'yyyy MM dd',
         value: ambiguousDate,
         useUtc: true // This should fail if `useUtc=false`
       }
     })
     // It's important to assert the input rendered output
-    wrapper.vm.$nextTick(() => {
-      expect(wrapper.find(DateInput).vm.formattedValue).toEqual(UTCString)
-      done()
-    })
+    await nextTick()
+
+    const dateInput = wrapper.findComponent(DateInput)
+    expect(dateInput.exists()).toBe(true)
+    expect(dateInput.vm.formattedValue).toEqual(UTCString)
   })
 })
 
 describe('Datepicker with initial-view', () => {
   let wrapper
   it('should open in Day view', () => {
-    wrapper = shallow(Datepicker)
+    wrapper = shallowMount(Datepicker)
     wrapper.vm.showCalendar()
     expect(wrapper.vm.computedInitialView).toEqual('day')
     expect(wrapper.vm.showDayView).toEqual(true)
@@ -295,8 +288,8 @@ describe('Datepicker with initial-view', () => {
   })
 
   it('should open in Month view', () => {
-    wrapper = shallow(Datepicker, {
-      propsData: {
+    wrapper = shallowMount(Datepicker, {
+      props: {
         initialView: 'month'
       }
     })
@@ -308,8 +301,8 @@ describe('Datepicker with initial-view', () => {
   })
 
   it('should open in Year view', () => {
-    wrapper = shallow(Datepicker, {
-      propsData: {
+    wrapper = shallowMount(Datepicker, {
+      props: {
         initialView: 'year'
       }
     })

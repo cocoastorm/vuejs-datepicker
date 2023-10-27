@@ -1,12 +1,12 @@
 import PickerDay from '@/components/PickerDay.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import { en } from '@/locale'
 
 describe('PickerDay highlight date', () => {
   let wrapper
   beforeEach(() => {
-    wrapper = shallow(PickerDay, {
-      propsData: {
+    wrapper = shallowMount(PickerDay, {
+      props: {
         allowedToShowView: () => true,
         translation: en,
         pageDate: new Date(2016, 9, 1),
@@ -30,8 +30,8 @@ describe('PickerDay highlight date', () => {
     expect(wrapper.vm.isHighlightedDate(new Date(2016, 12, 5))).toEqual(false)
   })
 
-  it('should highlight a disabled date when explicitly configured to', () => {
-    wrapper.setProps({
+  it('should highlight a disabled date when explicitly configured to', async () => {
+    await wrapper.setProps({
       highlighted: {
         to: new Date(2016, 12, 8),
         from: new Date(2016, 12, 4),
@@ -57,8 +57,8 @@ describe('PickerDay highlight date', () => {
     expect(wrapper.vm.isHighlightedDate(new Date(2016, 12, 3))).toEqual(false)
   })
 
-  it('can accept an array of highlighted dates', () => {
-    wrapper.setProps({
+  it('can accept an array of highlighted dates', async () => {
+    await wrapper.setProps({
       highlighted: {
         dates: [
           new Date(2016, 9, 2),
@@ -71,8 +71,8 @@ describe('PickerDay highlight date', () => {
     expect(wrapper.vm.isHighlightedDate(new Date(2016, 9, 3))).toEqual(false)
   })
 
-  it('can accept an array of highlighted days of the week', () => {
-    wrapper.setProps({
+  it('can accept an array of highlighted days of the week', async () => {
+    await wrapper.setProps({
       highlighted: {
         days: [6, 0]
       }
@@ -81,8 +81,8 @@ describe('PickerDay highlight date', () => {
     expect(wrapper.vm.isHighlightedDate(new Date(2016, 9, 3))).toEqual(false)
   })
 
-  it('can accept an array of highlighted days of the month', () => {
-    wrapper.setProps({
+  it('can accept an array of highlighted days of the month', async () => {
+    await wrapper.setProps({
       highlighted: {
         daysOfMonth: [1, 10, 31]
       }
@@ -95,8 +95,8 @@ describe('PickerDay highlight date', () => {
     expect(wrapper.vm.isHighlightedDate(new Date(2016, 7, 20))).toEqual(false)
   })
 
-  it('can accept a customPredictor to check if the date is highlighted', () => {
-    wrapper.setProps({
+  it('can accept a customPredictor to check if the date is highlighted', async () => {
+    await wrapper.setProps({
       highlighted: {
         customPredictor (date) {
           if (date.getDate() % 5 === 0) {

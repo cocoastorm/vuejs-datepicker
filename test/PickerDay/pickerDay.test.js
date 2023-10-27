@@ -1,12 +1,12 @@
 import PickerDay from '@/components/PickerDay.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import { en } from '@/locale'
 
 describe('PickerDay: DOM', () => {
   let wrapper
   beforeEach(() => {
-    wrapper = shallow(PickerDay, {
-      propsData: {
+    wrapper = shallowMount(PickerDay, {
+      props: {
         allowedToShowView: () => true,
         translation: en,
         pageDate: new Date(2018, 1, 1),
@@ -15,9 +15,9 @@ describe('PickerDay: DOM', () => {
     })
   })
 
-  it('knows the selected date', () => {
+  it('knows the selected date', async () => {
     const newDate = new Date(2016, 9, 15)
-    wrapper.setProps({
+    await wrapper.setProps({
       selectedDate: newDate
     })
     expect(wrapper.vm.isSelectedDate(newDate)).toEqual(true)
