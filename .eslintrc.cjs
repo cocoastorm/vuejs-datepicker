@@ -1,11 +1,11 @@
 module.exports = {
   env: {
-    node: true,
+    node: true
   },
   extends: [
     'eslint:recommended',
     'eslint-config-standard',
-    'plugin:vue/vue3-essential',
+    'plugin:vue/vue3-essential'
   ],
   // add your custom rules here
   rules: {
@@ -16,6 +16,6 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // ignore component name multiword rule
-    'vue/multi-word-component-names': 0,
+    'vue/multi-word-component-names': 0
   }
 }
