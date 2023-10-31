@@ -38,9 +38,12 @@
     <slot name="afterDateInput"></slot>
   </div>
 </template>
+
 <script>
+import { defineComponent } from 'vue'
 import { makeDateUtils } from '../utils/DateUtils'
-export default {
+
+export default defineComponent({
   props: {
     selectedDate: Date,
     resetTypedDate: [Date],
@@ -148,7 +151,5 @@ export default {
   mounted () {
     this.input = this.$el.querySelector('input')
   }
-}
-// eslint-disable-next-line
-;
+})
 </script>
