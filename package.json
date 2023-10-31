@@ -11,10 +11,11 @@
   "type": "module",
   "files": [
     "dist",
-    "dist/locale"
+    "types"
   ],
   "main": "dist/vuejs-datepicker.cjs",
   "module": "dist/vuejs-datepicker.js",
+  "types": "dist/vuejs-datepicker.d.ts",
   "exports": {
     ".": {
       "import": "./dist/vuejs-datepicker.js",
@@ -26,6 +27,7 @@
     },
     "./locale/*.js": "./dist/locale/*.js",
     "./locale/*.cjs": "./dist/locale/*.cjs",
+    "./dist/style.css": "./dist/style.css",
     "./style.css": "./dist/style.css"
   },
   "author": "TuneZilla Ltd. <web@tunezilla.com>",
@@ -58,6 +60,7 @@
     "postcss-html": "^1.5.0",
     "rimraf": "^5.0.5",
     "vite": "^4.5.0",
+    "vite-plugin-dts": "^3.6.3",
     "vite-plugin-eslint": "^1.8.1",
     "vitest": "^1.0.0-beta.2"
   },

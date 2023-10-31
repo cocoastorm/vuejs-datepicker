@@ -1,17 +1,38 @@
-import fs from 'node:fs';
+import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath, URL } from 'node:url';
-import {defineConfig} from 'vite'
+import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts'
 
 const locales = fs.readdirSync('./src/locale/translations').map((locale) => ([
   path.join('locale/translations', path.basename(locale, '.js')),
-  path.resolve(__dirname, 'src/locale/translations', locale),
+  path.resolve(__dirname, 'src/locale/translations', locale)
 ]))
 
 export default defineConfig({
   plugins: [
     Vue(),
+    dts({
+      copyDtsFiles: true,
+      outDir: [
+        'dist',
+        'types'
+      ],
+      staticImport: true,
+      // rollupTypes: true,
+      compilerOptions: {
+        declarationMap: true
+      },
+      include: [
+        path.resolve(__dirname, 'src/components/Datepicker.vue'),
+        path.resolve(__dirname, 'src/locale')
+      ],
+      beforeWriteFile: (filePath, content) => ({
+        filePath: filePath.replace('components/Datepicker.vue', 'vuejs-datepicker'),
+        content
+      })
+    })
   ],
   resolve: {
     alias: {
@@ -21,12 +42,12 @@ export default defineConfig({
   build: {
     lib: {
       entry: {
-        'vuejs-datepicker': path.resolve(__dirname, 'src/main.js'),
+        'vuejs-datepicker': path.resolve(__dirname, 'src/components/Datepicker.vue'),
         ...Object.fromEntries(locales),
-        'locale/index': path.resolve(__dirname, 'src/locale/index.js'),
+        'locale/index': path.resolve(__dirname, 'src/locale/index.js')
       },
       name: '@tunezilla/vuejs-datepicker',
-      formats: ['es', 'cjs'],
+      formats: ['es', 'cjs']
     },
     rollupOptions: {
       external: ['vue'],
@@ -36,5 +57,5 @@ export default defineConfig({
         }
       }
     }
-  },
+  }
 })
