@@ -20,9 +20,12 @@
       @click.stop="selectYear(year)">{{ year.year }}</span>
   </div>
 </template>
+
 <script>
+import { defineComponent } from 'vue'
 import { makeDateUtils } from '../utils/DateUtils'
-export default {
+
+export default defineComponent({
   props: {
     showYearView: Boolean,
     selectedDate: Date,
@@ -168,7 +171,5 @@ export default {
       return disabledDates
     }
   }
-}
-// eslint-disable-next-line
-;
+})
 </script>

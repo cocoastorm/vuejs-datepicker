@@ -26,9 +26,12 @@
     </div>
   </div>
 </template>
+
 <script>
+import { defineComponent } from 'vue'
 import { makeDateUtils } from '../utils/DateUtils'
-export default {
+
+export default defineComponent({
   props: {
     showDayView: Boolean,
     selectedDate: Date,
@@ -369,7 +372,5 @@ export default {
       return typeof prop !== 'undefined' && prop
     }
   }
-}
-// eslint-disable-next-line
-;
+})
 </script>

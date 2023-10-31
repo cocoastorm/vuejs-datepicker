@@ -92,14 +92,17 @@
     </picker-year>
   </div>
 </template>
+
 <script>
+import { defineComponent } from 'vue'
 import en from '../locale/translations/en'
 import DateInput from './DateInput.vue'
 import PickerDay from './PickerDay.vue'
 import PickerMonth from './PickerMonth.vue'
 import PickerYear from './PickerYear.vue'
 import utils, { makeDateUtils } from '../utils/DateUtils'
-export default {
+
+export default defineComponent({
   components: {
     DateInput,
     PickerDay,
@@ -455,8 +458,7 @@ export default {
   mounted () {
     this.init()
   }
-}
-// eslint-disable-next-line
-;
+})
 </script>
+
 <style src="../styles/style.css" lang="css" />
