@@ -237,12 +237,14 @@ describe('Datepicker.vue set by timestamp', () => {
     wrapper = shallowMount(Datepicker, {
       props: {
         format: 'yyyy MM dd',
-        value: new Date(Date.UTC(2018, 0, 29)).getTime()
+        // https://github.com/charliekassel/vuejs-datepicker/commit/b2e9b37ad626bb0a65fd190dbd926671e347c7c0#diff-55b4db7abe80bcc349e3d6d4cd28bf5b8debca792b25d728c828a03e5d58c9fdL259
+        value: 1517194697668
       }
     })
+
     expect(wrapper.vm.selectedDate.getFullYear()).toEqual(2018)
     expect(wrapper.vm.selectedDate.getMonth()).toEqual(0)
-    expect(wrapper.vm.selectedDate.getDate()).toEqual(29)
+    expect(wrapper.vm.selectedDate.getDate()).toEqual(28)
   })
 })
 
