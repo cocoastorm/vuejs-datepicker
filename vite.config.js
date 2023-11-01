@@ -25,12 +25,13 @@ export default defineConfig({
         declarationMap: true
       },
       include: [
+        path.resolve(__dirname, '*.d.ts'),
         path.resolve(__dirname, 'src/components/Datepicker.vue'),
         path.resolve(__dirname, 'src/locale')
       ],
       beforeWriteFile: (filePath, content) => ({
         filePath: filePath.replace('components/Datepicker.vue', 'vuejs-datepicker'),
-        content
+        content: content.replace('Datepicker.vue', 'vuejs-datepicker')
       })
     })
   ],

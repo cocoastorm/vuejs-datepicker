@@ -41,7 +41,7 @@
   "private": false,
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && vite build",
+    "build": "rimraf dist && rimraf types && vite build",
     "serve": "vite --host",
     "lint": "eslint --ext .js,.vue src test",
     "test": "vitest",
