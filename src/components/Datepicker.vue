@@ -244,7 +244,7 @@ export default defineComponent({
     },
     /**
      * Effectively a toggle to show/hide the calendar
-     * @return {mixed}
+     * @return {void|boolean}
      */
     showCalendar () {
       if (this.disabled || this.isInline) {
